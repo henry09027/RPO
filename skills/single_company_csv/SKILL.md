@@ -28,11 +28,14 @@ company's fiscal calendar (e.g., a Dec-31 fiscal year means fiscal = calendar).
 ### 3. Extract RPO from filings
 - `getDocuments` (corpus: `SEC Filings`, types `10-K`/`10-Q`) to list filings
   with filing dates and transcript IDs.
-- `searchSentences` / `getDocumentSummary` scoped to each transcript with query
+- `searchSentences` / `getDocumentSummary` scoped to each filing with query
   `remaining performance obligations` / `revenue backlog`.
-- **Verify every figure against the primary SEC filing** (10-Q/10-K PDF or
-  EDGAR). Do not trust summarizer output blindly — it can cross-contaminate
-  figures across periods.
+- **Validate every figure ONLY against the official SEC EDGAR filing**
+  (`https://www.sec.gov/edgar/`) — the source 10-Q/10-K on EDGAR is the sole
+  source of truth. Do NOT validate against earnings call transcripts, and do
+  NOT use news, blogs, or third-party aggregators. Tool/summarizer output is a
+  lead only; it can cross-contaminate figures across periods and must be
+  confirmed on EDGAR.
 - Align each filing's period-end date to the correct row from Step 2.
 
 ### 4. Consolidate & write CSV
